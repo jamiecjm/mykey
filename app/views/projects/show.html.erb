@@ -1,0 +1,24 @@
+<h3><%=@project.name%></h3>
+Models: 
+<%@project.models.each_with_index do |m,index|%>
+	<%if index == @project.models.length-1%>
+		<%=m.package%>
+	<%else%>
+		<%=m.package%>,
+	<%end%>
+<%end%>
+<p></p>
+Layouts:<br>
+<%@project.layouts.each do |l|%>
+	Size:<%=l.size%><br>
+	Floor Plan:<br>
+	<%= image_tag l.plan.url%>
+	<p></p>
+	Showrooms:<br>
+	<%l.pictures.length.times do |t|%>
+
+		<%= image_tag l.pictures[t].url%>
+
+	<%end%>
+<p></p>
+<%end%>

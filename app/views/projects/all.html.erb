@@ -1,0 +1,7 @@
+<h3>Projects</h3>
+
+<div class="list-group" id="sidenav">
+<%Project.all.each do |p|%>
+<%=link_to "#{p.name}", project_path(p),class: "list-group-item"%>
+<%end%>
+</div>	

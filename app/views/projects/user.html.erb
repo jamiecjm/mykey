@@ -1,0 +1,19 @@
+<div class="list-group list-group-root well">
+<h3>&nbsp;&nbsp;&nbsp;<%=current_user.title%> <%=current_user.name%>'s Properties</h3>
+  <%current_user.projects.each do |p|%>
+
+    <a href="#<%=p.id%>" class="list-group-item" data-toggle="collapse">
+      <i class="glyphicon glyphicon-chevron-right"></i><%=p.name%>
+    </a>
+
+    <%p.user_units(current_user).each do |u|%>
+
+      <div class="list-group collapse" id="<%=p.id%>">
+        <a href="/units/<%=u.id%>" class="list-group-item">
+          <%=u.unit_no%>
+        </a>
+      </div>
+
+    <%end%>
+  <%end%>
+</div>

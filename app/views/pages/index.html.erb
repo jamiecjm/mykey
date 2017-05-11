@@ -1,0 +1,18 @@
+<h3>Welcome, <%="#{current_user.title} #{current_user.name}"%></h3>
+
+
+<%if current_user.email == "admin"%>
+<div class="list-group" id="sidenav">
+<%=link_to "View projects", all_projects_path,class: "list-group-item"%>
+<%=link_to "Add a project", new_project_path,class: "list-group-item"%>
+<%=link_to "Create client profile", new_user_path,class: "list-group-item"%>
+<%=link_to "Add client unit", new_unit_path,class: "list-group-item"%>
+</div>	
+<%else%>
+<div class="list-group" id="sidenav">
+<%=link_to "View my account", pages_account_path,class: "list-group-item"%>
+<%=link_to "View my properties", "/user_projects",class: "list-group-item"%>
+<%=link_to "View project designs", all_projects_path,class: "list-group-item"%>
+<%=link_to "View my profile", user_path(current_user),class: "list-group-item"%>
+</div>
+<%end%>

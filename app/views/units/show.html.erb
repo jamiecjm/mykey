@@ -1,0 +1,16 @@
+<h3><%=@unit.unit_no%></h3>
+Project: <%=@unit.project.name%><br>
+Model: <%=@unit.model.package%><br>
+<%l = @unit.layout%>
+Size: <%=l.size%> sqft
+<p></p>
+Layout:<br>
+<%= image_tag l.plan.url%>
+<p></p>
+Showrooms:<br>
+
+<%l.pictures.length.times do |t|%>
+
+	<%= image_tag l.pictures[t].url%>
+
+<%end%>
