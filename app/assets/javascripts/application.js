@@ -55,7 +55,9 @@ document.addEventListener("turbolinks:load",function(){
 	$('select').attr("class","form-control")
 
 	$('#datepicker').datepicker({
-        dateFormat: "yy-mm-dd"
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
     })
 
     $('.list-group-item').on('click', function() {
