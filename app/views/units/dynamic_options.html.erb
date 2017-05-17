@@ -1,5 +1,6 @@
-<label>Model</label>
+
 <div class="form-group">
+<label>Model</label>
 <select name="model_id" class="form-control" required>
 	<option value="">Select a model</option>
 	<%@project.models.each do |m|%>
@@ -8,8 +9,9 @@
 </select>
 </div>
 
-<label>Unit size</label>
+
 <div class="form-group">
+<label>Unit size</label>
 <select name="layout_id" class="form-control" required>
 	<option value="">Select a size</option>
 	<%@project.layouts.each do |l|%>

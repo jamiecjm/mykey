@@ -42,9 +42,9 @@
 
   <div id="flash">
     <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"  class="alert alert-success alert-dismissable">
+      <div class="alert alert-<%=key%> alert-dismissable">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <%=h value %></div>
+      <%= value %></div>
     <% end %>
   </div>
   <div class="container"%>

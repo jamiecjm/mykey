@@ -1,0 +1,28 @@
+<h3>All Units</h3>
+<table class="table">
+<thead>
+<tr>
+<th>No</th>
+<th>Project</th>
+<th>Unit No</th>
+<th>Client</th>
+<th>Net Value</th>
+<th>Size</th>
+<th>Package</th>
+</tr>
+</thead>
+
+<tbody>
+<%@units.order("projects.name").each_with_index do |u,index|%>
+<tr id = "/units/<%=u.id%>/edit" class="clickable-row">
+<td><%=index+1%></td>
+<td><%=u.project.name%></td>
+<td><%=u.unit_no%></td>
+<td><%=u.user.name%></td>
+<td><%=u.net_value%></td>
+<td><%=u.layout.size%></td>
+<td><%=u.model.package%></td>
+</tr>
+<%end%>
+</tbody>
+</table>

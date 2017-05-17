@@ -2,7 +2,9 @@ class User < ApplicationRecord
   include Clearance::User
   has_many :units
   has_many :projects, through: :units
+
   validates_confirmation_of :password
+  validates :email, uniqueness: :true
 
   attr_accessor :original_password
 

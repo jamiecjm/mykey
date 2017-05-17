@@ -11,6 +11,10 @@ class UnitsController < ApplicationController
 		redirect_to "/"
 	end
 
+	def index
+		@units = Unit.includes(:model,:project,:user,:layout)
+	end
+
 	def show
 		@unit = Unit.find(params[:id])
 	end
@@ -18,6 +22,10 @@ class UnitsController < ApplicationController
 	def dynamic_options
 		@project = Project.find(params[:id])
 		render "units/dynamic_options.html.erb", :layout => false
+	end
+
+	def edit
+		@unit = Unit.find(params[:id])
 	end
 
 	private

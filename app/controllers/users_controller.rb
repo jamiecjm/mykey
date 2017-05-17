@@ -19,6 +19,10 @@ class UsersController < Clearance::UsersController
 		redirect_to "/"
 	end
 
+	def index
+		@users = User.all
+	end
+
 	def show
 		@user = current_user 
 	end
@@ -55,7 +59,7 @@ class UsersController < Clearance::UsersController
 	private
 
 	def user_signup_params
-	    params.require(:user).permit(:title,:name,:email,:password)
+	    params.require(:user).permit(:title,:name,:email,:password,:mobile_no)
 	end
 
 	def user_update_params

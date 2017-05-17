@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   get "/sign_up" => "users#new", as: "sign_up"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :projects, controller: "projects"
-  get "/all_projects" => "projects#all"
   get "/user_projects" => "projects#user"
+  get "/project/:project_id/units" => "projects#units"
   resources :units, controller: "units"
   get "/units/dynamic_options/:id" => "units#dynamic_options"
 end

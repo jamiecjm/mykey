@@ -1,24 +1,35 @@
-<h3><%=@project.name%></h3>
-Models: 
-<%@project.models.each_with_index do |m,index|%>
-	<%if index == @project.models.length-1%>
-		<%=m.package%>
-	<%else%>
-		<%=m.package%>,
-	<%end%>
+<div class ="row">
+ <div class="col-sm-1 col-offset-6 centered">
+<h1><%=@project.name%></h1>
+</div>
+</div>
+<%if current_user.email.downcase=="admin"%>
+	<%=link_to "Edit",edit_project_path(@project)%>
 <%end%>
-<p></p>
-Layouts:<br>
+
 <%@project.layouts.each do |l|%>
-	Size:<%=l.size%><br>
-	Floor Plan:<br>
-	<%= image_tag l.plan.url%>
-	<p></p>
-	Showrooms:<br>
-	<%l.pictures.length.times do |t|%>
-
-		<%= image_tag l.pictures[t].url%>
-
-	<%end%>
-<p></p>
+<div class="panel panel-default">
+<div class="panel-body">
+<h4>Size:<%=l.size%> sqft</h4>
+<h4>Floor Plan:</h4> 
+<div class="row">
+	<div class="col-sm-6 col-md-3">
+		<%= image_tag l.plan.thumb.url if !l.plan.thumb.url.nil?%>
+	</div>
+</div>
+<h4>Proposed Interior Design:</h4> 
+<div class="row">
+		<%if l.pictures != []%>
+			<%l.pictures.length.times do |t|%>
+				<div class="col-sm-6 col-md-3" style="margin-bottom: 10px ">
+				<%= image_tag l.pictures[t].thumb.url%>
+				</div>
+			<%end%>
+		<%end%>
+</div>
+<br><br>
+</div>
+</div>
 <%end%>
+
+

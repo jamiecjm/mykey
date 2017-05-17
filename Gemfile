@@ -58,3 +58,4 @@ gem "figaro"
 gem "nested_form"
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
+gem "letter_opener", :group => :development

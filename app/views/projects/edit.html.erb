@@ -1,5 +1,5 @@
 <div class="well">
-<h3>New Project</h3>
+<h3>Update Project</h3>
 <%=nested_form_for @project,remote: true,authenticity_token: true,class: "form-horizontal" do |form|%>
 
 <div class="form-group">
@@ -10,13 +10,14 @@
 <strong>Packages:</strong>
 <p></p>
 <%= form.fields_for :models,Model.new do |sv_form| %>
-
+<%@project.models.each do |m|%>
   <div class="form-group">
-    <%= sv_form.text_field :package,class: "form-control",placeholder: "Package type" %>
+    <%= sv_form.text_field :package,class: "form-control",placeholder: "Package type",value: "#{m.package}" %>
   </div>
 
   <%= sv_form.link_to_remove "Remove this package" %>
 <p></p>
+<%end%>
 <% end %>
 
 <p><%= form.link_to_add "Add Package", :models %></p>

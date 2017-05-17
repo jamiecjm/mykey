@@ -66,5 +66,9 @@ document.addEventListener("turbolinks:load",function(){
           .toggleClass('glyphicon-chevron-down');
       });
 
+    $('.clickable-row').click(function(){
+        window.location=$(this).attr("id")
+    })
+
     
 })

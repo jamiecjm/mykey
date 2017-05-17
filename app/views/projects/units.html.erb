@@ -1,0 +1,26 @@
+<h3><%=@project.name%>'s Units</h3>
+<table class="table">
+<thead>
+<tr>
+<th>No</th>
+<th>Unit No</th>
+<th>Client</th>
+<th>Net Value</th>
+<th>Size</th>
+<th>Package</th>
+</tr>
+</thead>
+
+<tbody>
+<%@units.order(:unit_no).each_with_index do |u,index|%>
+<tr>
+<td><%=index+1%></td>
+<td><%=u.unit_no%></td>
+<td><%=u.user.name%></td>
+<td><%=u.net_value%></td>
+<td><%=u.layout.size%></td>
+<td><%=u.model.pacakage%></td>
+</tr>
+<%end%>
+</tbody>
+</table>

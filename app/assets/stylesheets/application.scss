@@ -2,6 +2,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.clickable-row:hover {
+  cursor:pointer
+}
+
+#flash {
+  position: fixed;
+  width: 100%; 
+}
+
 .container {
 	margin-top: 80px;
   width:100%;

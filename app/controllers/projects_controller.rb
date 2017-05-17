@@ -6,10 +6,13 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
-		ActiveRecord::Base.transaction do
-			@project = Project.new(project_params)
-			@project.save
+		@project = Project.new(project_params)
+		if @project.save
+			flash[:success] = "Project has been created."
 			redirect_to project_path(@project)
+		else
+			# flash.now[:danger] = @project.errors.full_messages
+			render "new", alert: @project.errors.full_messages
 		end
 	end
 
@@ -17,12 +20,26 @@ class ProjectsController < ApplicationController
 		@project = Project.find(params[:id])
 	end
 
-	def all
+	def index
 		@projects = Project.all
 	end
 
 	def user
 		@projects = current_user.projects
+	end
+
+	def units
+		@project= params[:project_id]
+		@units = @project.units.includes(:model,:project,:user,:layout)
+	end
+
+	def edit
+		@project = Project.find(params[:id])
+	end
+
+	def update
+		@project = Project.find(params[:id])
+		byebug
 	end
 
 	private
