@@ -1,5 +1,6 @@
 class UsersController < Clearance::UsersController
 	if respond_to?(:before_action)
+		before_action :admin, only: [:new,:create,:index]
 	    skip_before_action :require_login, only: [:create, :new], raise: false
 	    skip_before_action :authorize, only: [:create, :new], raise: false
 	  else
@@ -15,8 +16,13 @@ class UsersController < Clearance::UsersController
 
 	def create
 		@user = User.new(user_signup_params)
-		@user.save
-		redirect_to "/"
+		if @user.save
+			flash[:success] = "Client profile created"
+			redirect_to "/"
+		else
+			flash.now[:danger] = @user.errors.full_messages.first
+			render "new"
+		end
 	end
 
 	def index
@@ -28,19 +34,35 @@ class UsersController < Clearance::UsersController
 	end
 
 	def edit
+		@user = User.find(params[:id])
 	end
 
 	def update
-		current_user.update(user_update_params)
-		redirect_to user_path(current_user)
+		@user = User.find(params[:id])
+		if @user.update(user_update_params)
+			flash[:success] = "Profile updated"
+			redirect_to user_path(@user)
+		else
+			flash.now[:danger] = @user.errors.full_messages.first
+			render "edit"
+		end
 	end
 
 	def first_login
 	end
 
 	def first_update
-		current_user.update(first_update_params)
-		redirect_to "/"
+		if User.authenticate(current_user.email,params[:original_password])
+			if current_user.update(first_update_params)
+				redirect_to "/"
+			else
+				flash.now[:danger] = current_user.errors.full_messages.first
+				render 'first_login'
+			end
+		else
+			flash.now[:danger] = "Incorrect password"
+			render 'first_login'
+		end
 	end
 
 	def change_password
@@ -50,10 +72,23 @@ class UsersController < Clearance::UsersController
 	def update_password
 		user = User.find(params[:user_id])
 		if user = User.authenticate(user.email,params[:original_password])
-			user.update(password: params[:password],password_confirmation: params[:password_confirmation])
+			if user.update(password: params[:password],password_confirmation: params[:password_confirmation])
+				flash[:success] = "Password updated"
+				redirect_to user_path(user)
+			else
+				flash.now[:danger] = user.errors.full_messages.first
+				render "change_password"
+			end
 		else
-		byebug
+			flash.now[:danger] = "Incorrect password"
+			render "change_password"
 		end
+	end
+
+	def destroy
+		user = User.find(params[:id])
+		user.destroy
+		redirect_to "/users"
 	end
 
 	private

@@ -1,8 +1,8 @@
 class Unit < ApplicationRecord
-	belongs_to :user
-	belongs_to :project
-	belongs_to :layout
-	belongs_to :model
+	belongs_to :user, optional: true
+	belongs_to :project, optional: true
+	belongs_to :layout, optional: true
+	belongs_to :model, optional: true
 
 	before_save :upcase
 

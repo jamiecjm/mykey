@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-
+	before_action :admin, only: [:new,:create,:edit,:update]
 
 	def new
 		@project = Project.new
@@ -11,8 +11,10 @@ class ProjectsController < ApplicationController
 			flash[:success] = "Project has been created."
 			redirect_to project_path(@project)
 		else
-			# flash.now[:danger] = @project.errors.full_messages
-			render "new", alert: @project.errors.full_messages
+			flash.now[:danger] = @project.errors.full_messages.first
+			respond_to do |format|
+				format.js
+			end
 		end
 	end
 
@@ -39,7 +41,21 @@ class ProjectsController < ApplicationController
 
 	def update
 		@project = Project.find(params[:id])
-		byebug
+		if @project.update(project_params)
+			flash[:success] = "Project updated"
+			redirect_to projects_path
+		else
+			flash.now[:danger] = @project.errors.full_messages.first
+			respond_to do |format|
+				format.js
+			end
+		end
+	end
+
+	def destroy
+		project = Project.find(params[:id])
+		project.destroy
+		redirect_to "/projects"
 	end
 
 	private

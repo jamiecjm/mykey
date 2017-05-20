@@ -53,9 +53,10 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'clearance'
-gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'jquery-ui-rails'
 gem "figaro"
 gem "nested_form"
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem "letter_opener", :group => :development
+gem 'rails_admin'

@@ -1,15 +1,21 @@
-<div class="well">
-<h3>Update Unit</h3>
+<div class="col-lg-12">
+<h1 class="page-header">Edit Unit</h1>
+<div>
+
+<div class="row">
+<div class="well col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
 <%=nested_form_for @unit,remote: true,authenticity_token: true do |form|%>
 
+<%=render partial: "form",:object => form%>
+
 <div class="form-group">
-  <%= form.label :client %>
-  <%= form.select :user_id, options_for_select([["Select Client",""]]+User.where.not(name: "Admin").order("name").pluck(:name,:id))%>
+  <%= form.label :model %>
+  <%= form.select :model_id, options_for_select(@unit.project.models.pluck(:package,:id),:selected => @unit.model_id),{:prompt => "Select Modal"},{class: "form-control",required: true}%>
 </div>
 
 <div class="form-group">
-  <%= form.label :project %>
-  <%= form.select :project_id, options_for_select([["Select Project",""]]+Project.all.order("name").pluck(:name,:id))%>
+  <%= form.label :unit_size %>
+  <%= form.select :layout_id, options_for_select(@unit.project.layouts.pluck(:size,:id),:selected => @unit.layout_id),{:prompt => "Select Layout"},{class: "form-control",required: true}%>
 </div>
 
 <div class="form-group">
@@ -22,12 +28,10 @@
   <%= form.number_field :net_value,class: "form-control",min: "0",step: "any", required: true%>
 </div>
 
-
-
-
-
 <%= form.submit :submit,class: "btn btn-default" %>
 <%end%>
+</div>
+</div>
 </div>
 
 <%=javascript_tag do%>
@@ -46,6 +50,8 @@ document.addEventListener("turbolinks:load",function(){
 				data: $(this).serialize(),
 				dataType: "html",
 				success: function(data){
+					$('#unit_model_id').parent().remove()
+					$('#unit_layout_id').parent().remove()
 					$("select[name = layout_id]").parent().remove()
 					$("select[name = model_id]").parent().remove()
 					$("#unit_project_id").parent().after(data)

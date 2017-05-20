@@ -9,8 +9,17 @@ class Project < ApplicationRecord
 
 	validates :name, uniqueness: :true
 
+	before_save :titleize
+
 	def user_units(user)
 		self.units.where("units.user_id = ?",user.id)
 	end
+
+	private
+
+	def titleize
+		self.name =self.name.titleize
+	end
+
 
 end

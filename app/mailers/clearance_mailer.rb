@@ -1,4 +1,4 @@
-class UserMailer < ApplicationMailer
+class ClearanceMailer < ApplicationMailer
   def change_password(user)
     @user = user
     mail(

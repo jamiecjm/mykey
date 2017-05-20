@@ -1,11 +1,11 @@
-<div class ="row">
- <div class="col-sm-1 col-offset-6 centered">
-<h1><%=@project.name%></h1>
-</div>
-</div>
+
+<div class="col-lg-12">
+<h1 class="page-header"><%=@project.name%></h1>
+<div>
 <%if current_user.email.downcase=="admin"%>
-	<%=link_to "Edit",edit_project_path(@project)%>
-<%end%>
+	<%=link_to "Edit",edit_project_path(@project), class: "btn btn-default"%>
+	<button class="delete btn btn-default" data-toggle="modal" data-target="#deleteModal" id="/projects/<%=@project.id%>">Delete</button>
+<%end%><br><br>
 
 <%@project.layouts.each do |l|%>
 <div class="panel panel-default">
@@ -32,4 +32,5 @@
 </div>
 <%end%>
 
+<%=render "pages/deleteModal"%>
 

@@ -54,13 +54,15 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'mykeyoffice.com',
-    user_name:            'jamiecjm@gmail.com',
-    password:             '1201g18153cjm',
-    authentication:       'plain',
-    enable_starttls_auto: true  }
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'example.com',
+      user_name:            ENV["email_address"],
+      password:             ENV["password"],
+      authentication:       'plain',
+      enable_starttls_auto: true  }
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :letter_opener
-
+    # config.active_job.queue_adapter = :sidekiq
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end

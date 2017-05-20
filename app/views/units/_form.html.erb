@@ -1,0 +1,10 @@
+<div class="form-group">
+  <%= form.label :client %>
+  <%= form.select :user_id, options_for_select(User.where.not(name: "Admin").order("name").pluck(:name,:id),:selected => @unit.user_id),{:prompt => "Select Client"},{class: "form-control",required: true}%>
+</div>
+
+<div class="form-group">
+  <%= form.label :project %>
+  <%= form.select :project_id, options_for_select(Project.all.order("name").pluck(:name,:id),:selected => @unit.project_id),{:prompt => "Select Project"},{class: "form-control",required: true}%>
+</div>
+

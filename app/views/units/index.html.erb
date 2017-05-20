@@ -1,8 +1,11 @@
-<h3>All Units</h3>
+<div class="col-lg-12">
+<h1 class="page-header">Units</h1>
+<div>
+
 <table class="table">
 <thead>
 <tr>
-<th>No</th>
+<th>ID</th>
 <th>Project</th>
 <th>Unit No</th>
 <th>Client</th>
@@ -13,16 +16,28 @@
 </thead>
 
 <tbody>
-<%@units.order("projects.name").each_with_index do |u,index|%>
-<tr id = "/units/<%=u.id%>/edit" class="clickable-row">
-<td><%=index+1%></td>
+<%@units.order("projects.name").each do |u|%>
+<tr>
+<td><%=u.id%></td>
 <td><%=u.project.name%></td>
 <td><%=u.unit_no%></td>
 <td><%=u.user.name%></td>
 <td><%=u.net_value%></td>
 <td><%=u.layout.size%></td>
 <td><%=u.model.package%></td>
+<td>
+	<%=link_to edit_unit_path(u), "data-toggle"=> "tooltip", title: "Edit" do%>
+		<i class="glyphicon glyphicon-pencil" ></i>
+	<%end%>
+</td>
+<td>
+	<%=link_to "#", "data-toggle"=> "tooltip", title: "Delete", remote: true do%>
+		<i class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#deleteModal" id="/units/<%=u.id%>"></i>
+	<%end%>
+</td>
 </tr>
 <%end%>
 </tbody>
 </table>
+
+<%=render "pages/deleteModal"%>

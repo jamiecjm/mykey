@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def login_required
     if current_user.blank?
-      redirect_to('/sign_in') unless request.fullpath == "/sign_in" || request.fullpath == "/passwords/new"
+      redirect_to('/sign_in') unless request.fullpath == "/sign_in" || request.fullpath == "/passwords/new" || request.fullpath == "/passwords"
     end
   end
 

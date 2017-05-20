@@ -11,7 +11,11 @@ class SessionsController < Clearance::SessionsController
     @user = authenticate(params)
     sign_in(@user) do |status|
       if status.success?
-        redirect_to root_path
+        if current_user.email == "admin"
+          redirect_to root_path
+        else
+          redirect_to "/user_projects"
+        end
       else
         flash.now.notice = status.failure_message
         render template: "sessions/new", status: :unauthorized

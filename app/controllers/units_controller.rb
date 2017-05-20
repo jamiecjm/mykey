@@ -1,4 +1,5 @@
 class UnitsController < ApplicationController
+	before_action :admin, only: [:new,:create,:index,:edit,:update]
 
 	def new
 		@unit = Unit.new
@@ -8,6 +9,7 @@ class UnitsController < ApplicationController
 		@unit = Unit.new(unit_params)
 		@unit.save
 		@unit.update(model_layout_params)
+		flash[:success] = "Unit created"
 		redirect_to "/"
 	end
 
@@ -28,6 +30,20 @@ class UnitsController < ApplicationController
 		@unit = Unit.find(params[:id])
 	end
 
+	def update
+		@unit = Unit.find(params[:id])
+		@unit.update(update_params)	
+		@unit.update(model_layout_params) if params[:model_id] != nil
+		flash[:success] = "Unit updated"
+		redirect_to units_path
+	end
+
+	def destroy
+		unit = Unit.find(params[:id])
+		unit.destroy
+		redirect_to "/units"
+	end
+
 	private
 
 	def unit_params
@@ -36,5 +52,9 @@ class UnitsController < ApplicationController
 
 	def model_layout_params
 		params.permit(:model_id,:layout_id)
+	end
+
+	def update_params
+		params.require(:unit).permit(:user_id,:project_id,:unit_no,:net_value,:model_id,:layout_id)
 	end
 end

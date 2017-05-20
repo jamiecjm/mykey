@@ -46,14 +46,6 @@ document.addEventListener("turbolinks:load",function(){
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    $('button').click(function(e) {
-        e.preventDefault();
-        alert("This is a demo.\n :-)");
-    });
-
-    $('select').attr("required",true)
-	$('select').attr("class","form-control")
-
 	$('#datepicker').datepicker({
         dateFormat: "yy-mm-dd",
         changeMonth: true,
@@ -66,9 +58,7 @@ document.addEventListener("turbolinks:load",function(){
           .toggleClass('glyphicon-chevron-down');
       });
 
-    $('.clickable-row').click(function(){
-        window.location=$(this).attr("id")
-    })
+
 
     
 })

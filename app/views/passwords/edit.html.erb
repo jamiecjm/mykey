@@ -1,4 +1,4 @@
-<div id="clearance" class="password-reset">
+<div id="clearance" class="password-reset well">
   <h2><%= t(".title") %></h2>
 
   <p><%= t(".description") %></p>
@@ -6,13 +6,13 @@
   <%= form_for :password_reset,
         url: user_password_path(@user, token: @user.confirmation_token),
         html: { method: :put } do |form| %>
-    <div class="password-field">
+    <div class="form-group">
       <%= form.label :password %>
-      <%= form.password_field :password %>
+      <%= form.password_field :password, class: "form-control" %>
     </div>
 
     <div class="submit-field">
-      <%= form.submit %>
+      <%= form.submit "Submit", class: "btn btn-default" %>
     </div>
   <% end %>
 </div>
