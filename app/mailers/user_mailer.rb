@@ -2,7 +2,7 @@ class UserMailer < ApplicationMailer
   def change_password(user)
     @user = user
     email = @user.email
-    email = "jamiecjm@gmail.com" if @user.email == "admin"
+    email = ENV["email_address"] if @user.email == "admin"
     mail(
       from: Clearance.configuration.mailer_sender,
       to: email,

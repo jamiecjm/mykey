@@ -1,6 +1,6 @@
 class UsersController < Clearance::UsersController
 	if respond_to?(:before_action)
-		before_action :admin, only: [:new,:create,:index]
+		before_action :admin, only: [:new,:create,:index,:destroy]
 	    skip_before_action :require_login, only: [:create, :new], raise: false
 	    skip_before_action :authorize, only: [:create, :new], raise: false
 	  else

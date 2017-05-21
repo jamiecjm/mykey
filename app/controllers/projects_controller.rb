@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-	before_action :admin, only: [:new,:create,:edit,:update]
+	before_action :admin, only: [:new,:create,:edit,:update,:destroy]
 
 	def new
 		@project = Project.new

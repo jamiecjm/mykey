@@ -1,5 +1,5 @@
 class UnitsController < ApplicationController
-	before_action :admin, only: [:new,:create,:index,:edit,:update]
+	before_action :admin, only: [:new,:create,:index,:edit,:update,:destroy]
 
 	def new
 		@unit = Unit.new
