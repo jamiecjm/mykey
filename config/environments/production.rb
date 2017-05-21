@@ -98,5 +98,5 @@ config.action_mailer.smtp_settings = {
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
   config.assets.compile = true
   config.assets.digest = true
-
+  config.serve_static_files = true 
 end
