@@ -17,7 +17,7 @@ class SessionsController < Clearance::SessionsController
           redirect_to "/user_projects"
         end
       else
-        flash.now.notice = status.failure_message
+        flash.now[:danger] = "Incorrect Email or Password"
         render template: "sessions/new", status: :unauthorized
       end
     end

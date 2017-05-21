@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
       before_action :login_required
       before_action :first_login
     else
-      before_action :login_required
-      before_action :first_login
+      before_filter :login_required
+      before_filter :first_login
     end
 
   def login_required

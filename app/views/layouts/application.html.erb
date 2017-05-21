@@ -32,7 +32,7 @@
   <%=render "layouts/side_navbar"%>
 <%end%>
 
-  <% if signed_in?%>
+  <% if request.fullpath != "/sign_in"%>
     <div class="wrapper">
         <% flash.each do |key, value| -%>
         <div class="alert alert-<%=key%> alert-dismissable">

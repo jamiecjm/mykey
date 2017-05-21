@@ -8,6 +8,10 @@ class PasswordsController < Clearance::PasswordsController
     skip_before_action :authorize,
       only: [:create, :edit, :new, :update],
       raise: false
+    skip_before_action :login_required,
+      only: [:create, :edit, :new, :update]
+    skip_before_action :first_login,
+      only: [:create, :edit, :new, :update]
     before_action :ensure_existing_user, only: [:edit, :update]
   else
     skip_before_filter :require_login,
@@ -16,6 +20,10 @@ class PasswordsController < Clearance::PasswordsController
     skip_before_filter :authorize,
       only: [:create, :edit, :new, :update],
       raise: false
+    skip_before_filter :login_required,
+      only: [:create, :edit, :new, :update]
+    skip_before_filter :first_login,
+      only: [:create, :edit, :new, :update]
     before_filter :ensure_existing_user, only: [:edit, :update]
   end
 
@@ -24,16 +32,13 @@ class PasswordsController < Clearance::PasswordsController
       user.forgot_password!
       UserMailer.change_password(user).deliver
     end
-    render template: 'passwords/create'
+    flash.now[:info] = "Please check your email for the instructions"
+    render template: 'sessions/new'
   end
 
   def edit
-
     @user = find_user_for_edit
     if params[:token]
-      session[:password_reset_token] = params[:token]
-      redirect_to url_for
-    else
       render template: 'passwords/edit'
     end
   end
@@ -44,7 +49,6 @@ class PasswordsController < Clearance::PasswordsController
 
   def update
     @user = find_user_for_update
-
     if @user.update_password password_reset_params
       sign_in @user
       redirect_to url_after_update
@@ -79,7 +83,6 @@ class PasswordsController < Clearance::PasswordsController
   def find_user_by_id_and_confirmation_token
     user_param = Clearance.configuration.user_id_parameter
     token = session[:password_reset_token] || params[:token]
-
     Clearance.configuration.user_model.
       find_by_id_and_confirmation_token params[user_param], token.to_s
   end
@@ -98,20 +101,21 @@ class PasswordsController < Clearance::PasswordsController
   end
 
   def ensure_existing_user
-    unless find_user_by_id_and_confirmation_token
+    user=User.find(params[:user_id])
+    unless user.confirmation_token == params[:token]
       flash_failure_when_forbidden
       render template: "passwords/new"
     end
   end
 
   def flash_failure_when_forbidden
-    flash.now[:notice] = translate(:forbidden,
+    flash.now[:danger] = translate(:forbidden,
       scope: [:clearance, :controllers, :passwords],
       default: t('flashes.failure_when_forbidden'))
   end
 
   def flash_failure_after_update
-    flash.now[:notice] = translate(:blank_password,
+    flash.now[:danger] = translate(:blank_password,
       scope: [:clearance, :controllers, :passwords],
       default: t('flashes.failure_after_update'))
   end

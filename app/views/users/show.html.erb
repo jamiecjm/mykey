@@ -54,7 +54,9 @@
               </div>
             </div>
                  <div class="panel-footer">
+                 <%if current_user.email != "admin"%>
                         <a href="/users/<%=current_user.id%>/edit" data-original-title="Edit Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
+                  <%end%>
                         <a href="/passwords/change" data-original-title="Change Password" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-lock"></i></a>
                   </div>
             

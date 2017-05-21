@@ -42,6 +42,10 @@ class UsersController < Clearance::UsersController
 		if @user.update(user_update_params)
 			flash[:success] = "Profile updated"
 			redirect_to user_path(@user)
+		elsif @user.email == "admin"
+			@user.update_columns(user_update_params)
+			flash[:success] = "Profile updated"
+			redirect_to user_path(@user)
 		else
 			flash.now[:danger] = @user.errors.full_messages.first
 			render "edit"
@@ -74,6 +78,11 @@ class UsersController < Clearance::UsersController
 		if user = User.authenticate(user.email,params[:original_password])
 			if user.update(password: params[:password],password_confirmation: params[:password_confirmation])
 				flash[:success] = "Password updated"
+				redirect_to user_path(user)
+			elsif user.email == "admin"
+				user.attributes = {password: params[:password],password_confirmation: params[:password_confirmation]}
+				user.save(validate: false)
+				flash[:success] = "Profile updated"
 				redirect_to user_path(user)
 			else
 				flash.now[:danger] = user.errors.full_messages.first
