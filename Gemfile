@@ -63,3 +63,4 @@ gem 'rails_admin'
 gem 'foreman'
 gem 'rails_12factor', group: :production
 gem 'unicorn'
+gem 'fog'
