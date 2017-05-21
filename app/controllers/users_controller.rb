@@ -45,10 +45,6 @@ class UsersController < Clearance::UsersController
 		if @user.update(user_update_params)
 			flash[:success] = "Profile updated"
 			redirect_to user_path(@user)
-		elsif @user.email == "admin"
-			@user.update_columns(user_update_params)
-			flash[:success] = "Profile updated"
-			redirect_to user_path(@user)
 		else
 			flash.now[:danger] = @user.errors.full_messages.first
 			render "edit"
