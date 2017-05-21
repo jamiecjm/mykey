@@ -4,12 +4,9 @@ class UserMailer < ApplicationMailer
     email = @user.email
     email = ENV["email_address"] if @user.email == "admin"
     mail(
-      from: Clearance.configuration.mailer_sender,
+      from: 'jamiecjm@gmail.com',
       to: email,
-      subject: I18n.t(
-        :change_password,
-        scope: [:clearance, :models, :clearance_mailer]
-      ),
+      subject: 'MyKeyOffice: Change Password'
     )
   end
 end
