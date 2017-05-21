@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170510114720) do
+ActiveRecord::Schema.define(version: 20170521083103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170510114720) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json     "pictures"
+    t.index ["project_id"], name: "index_layouts_on_project_id", using: :btree
   end
 
   create_table "models", force: :cascade do |t|
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170510114720) do
     t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_models_on_project_id", using: :btree
   end
 
   create_table "projects", force: :cascade do |t|
@@ -46,6 +48,10 @@ ActiveRecord::Schema.define(version: 20170510114720) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["layout_id"], name: "index_units_on_layout_id", using: :btree
+    t.index ["model_id"], name: "index_units_on_model_id", using: :btree
+    t.index ["project_id"], name: "index_units_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_units_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

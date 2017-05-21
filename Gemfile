@@ -60,3 +60,6 @@ gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem "letter_opener", :group => :development
 gem 'rails_admin'
+gem 'foreman'
+gem 'rails_12factor', group: :production
+gem 'unicorn'
