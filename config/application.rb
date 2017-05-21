@@ -13,6 +13,7 @@ module Mykey
     # -- all .rb files in that directory are automatically loaded.
     config.sass.load_paths << File.expand_path('../../lib/assets/stylesheets/')
     config.sass.load_paths << File.expand_path('../../vendor/assets/stylesheets/')
+  	config.assets.initialize_on_precompile = false
   end
 end
 
