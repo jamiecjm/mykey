@@ -16,11 +16,11 @@
 		  </div>
 		
     <%end%>
-
+    <%if l.plan.present?%>
 	  <div class="col-sm-12 col-md-3" style="height:300px;">
 	  	<%=link_to "/pages/open_image_modal/#{l.id}/#{l.pictures.length}+1",remote: true do%><%=image_tag l.plan.thumb.url, class: "hover-shadow",id: "#{l.pictures.length}+1", style: "box-shadow: 5px 5px 1px grey;"%><%end%>
 	  </div>
-
+    <%end%>
 	</div>
 </div>
 <%end%>
