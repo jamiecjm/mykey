@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
     email = @user.email
     email = ENV["email_address"] if @user.email == "admin"
     mail(
-      from: 'jamiecjm@gmail.com',
+      from: Clearance.configuration.mailer_sender,
       to: email,
       subject: 'MyKeyOffice: Change Password'
     )
