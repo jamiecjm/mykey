@@ -88,8 +88,9 @@ config.action_mailer.smtp_settings = {
   address:              'smtp.gmail.com',
   port:                 587,
   domain:               'mykeyoffice.com',
-  user_name:            'jamiecjm@gmail.com',
-  password:             '1201g18153cjm',
+  user_name:            'ENV["email_address"]',
+  password:             'ENV["password"]',
   authentication:       'plain',
   enable_starttls_auto: true  }
+  config.action_mailer.default_url_options = { :host => 'mykeyoffice.herokuapp.com' }
 end
