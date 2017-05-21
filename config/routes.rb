@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   get "/project/:project_id/units" => "projects#units"
   resources :units, controller: "units"
   get "/units/dynamic_options/:id" => "units#dynamic_options"
+  resources :albums, controller: "albums"
+  resources :pictures, controller: "pictures"
 end

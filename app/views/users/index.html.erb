@@ -17,7 +17,7 @@
 </thead>
 
 <tbody>
-<%@users.each_with_index do |u,index|%>
+<%@users.where.not(email: "admin").each_with_index do |u,index|%>
 <tr>
 <td><%=u.id%></td>
 <td><%=u.title%></td>

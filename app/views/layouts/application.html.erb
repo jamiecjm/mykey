@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div id="header">
+<div id="header" class="hidden-xs">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -20,7 +20,7 @@
               <%end%>
             </li> 
           <li><%= link_to sign_out_path, method: :delete do%>
-            <i class="glyphicon glyphicon-log-in"></i> Sign Out
+            <i class="glyphicon glyphicon glyphicon-log-out"></i> Sign Out
             <%end%>
           </li>  
         <% end -%>

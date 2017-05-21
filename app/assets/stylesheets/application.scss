@@ -16,6 +16,20 @@
   margin: 80px 0 0 60px;
 }
 
+.wrapper {
+    position:inherit;
+    margin: 0px 0px;
+    padding: 0px 0px;
+}
+
+@media screen and (min-width: 765px) {
+  .wrapper {
+    padding: 0 50px;
+    min-height: 568px;
+    margin: 80px 0 0 60px;
+  }
+}
+
 @media screen and (min-width: 1000px) {
     .wrapper {
       position:inherit;
@@ -23,6 +37,7 @@
       padding: 0 100px;
   }
 }
+
 
 .sign-in {
   margin:8% 0%;
@@ -183,7 +198,7 @@ body,html{
       margin-left: -160px;
       float: left;
       margin-bottom: 0px;
-      margin-top:-15px;
+      margin-top:-63px;
       position:fixed;
     }
 
@@ -227,5 +242,9 @@ body,html{
   }
   section{
     padding-left: 15px;
+  }
+
+  button.navbar-toggle {
+    margin: 10px 15px 10px 0px;
   }
   
