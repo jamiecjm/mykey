@@ -31,9 +31,12 @@ class PasswordsController < Clearance::PasswordsController
     if user = find_user_for_create
       user.forgot_password!
       UserMailer.change_password(user).deliver
-    end
-    flash.now[:info] = "Please check your email for the instructions"
-    render template: 'sessions/new'
+      flash.now[:info] = "Please check your email for the instructions"
+      render template: 'sessions/new'
+    else
+      flash.now[:info] = "Email not found"
+      render template: 'passwords/new'
+    end 
   end
 
   def edit
