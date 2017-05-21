@@ -23,8 +23,8 @@
 <td><%=u.unit_no%></td>
 <td><%=u.user.name%></td>
 <td><%=u.net_value%></td>
-<td><%=u.layout.size%></td>
-<td><%=u.model.package%></td>
+<td><%=u.layout.size if u.layout.present?%></td>
+<td><%=u.model.package if u.model.present?%></td>
 <td>
 	<%=link_to edit_unit_path(u), "data-toggle"=> "tooltip", title: "Edit" do%>
 		<i class="glyphicon glyphicon-pencil" ></i>

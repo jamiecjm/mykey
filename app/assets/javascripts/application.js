@@ -49,7 +49,8 @@ document.addEventListener("turbolinks:load",function(){
 	$('#datepicker').datepicker({
         dateFormat: "yy-mm-dd",
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        yearRange: "-100:+0"
     })
 
     $('.list-group-item').on('click', function() {

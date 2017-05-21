@@ -1,4 +1,3 @@
-
 <div class="col-lg-12">
 <h1 class="page-header"><%=@project.name%></h1>
 <div>
@@ -7,30 +6,62 @@
 	<button class="delete btn btn-default" data-toggle="modal" data-target="#deleteModal" id="/projects/<%=@project.id%>">Delete</button>
 <%end%><br><br>
 
+<%=render "pages/deleteModal"%>
 <%@project.layouts.each do |l|%>
-<div class="panel panel-default">
-<div class="panel-body">
-<h4>Size:<%=l.size%> sqft</h4>
-<h4>Floor Plan:</h4> 
-<div class="row">
-	<div class="col-sm-6 col-md-3">
-		<%= image_tag l.plan.thumb.url if !l.plan.thumb.url.nil?%>
+<div class="panel panel-default" style= "box-shadow: 1px 1px 5px grey;">
+	<div class="panel-body">
+		<h4 class="page-header" style="margin-top:10px;"><%=l.size%> sqft</h4>
+
+		  <%l.pictures.each_with_index do |p,index|%>
+		  <div class="col-sm-12 col-md-3" style="height:300px;">
+		  	<%=link_to "/pages/open_image_modal/#{l.id}/#{index+1}",remote: true do%><%=image_tag p.thumb.url, class: "hover-shadow",id: "#{index+1}", style: "box-shadow: 5px 5px 1px grey;"%><%end%>
+		  </div>
+		  <%end%>
+  		  <div class="col-sm-12 col-md-3" style="height:300px;">
+  		  	<%=link_to "/pages/open_image_modal/#{l.id}/#{l.pictures.length}+1",remote: true do%><%=image_tag l.plan.thumb.url, class: "hover-shadow",id: "#{l.pictures.length}+1", style: "box-shadow: 5px 5px 1px grey;"%><%end%>
+		  </div>
+
 	</div>
-</div>
-<h4>Proposed Interior Design:</h4> 
-<div class="row">
-		<%if l.pictures != []%>
-			<%l.pictures.length.times do |t|%>
-				<div class="col-sm-6 col-md-3" style="margin-bottom: 10px ">
-				<%= image_tag l.pictures[t].thumb.url%>
-				</div>
-			<%end%>
-		<%end%>
-</div>
-<br><br>
-</div>
 </div>
 <%end%>
 
-<%=render "pages/deleteModal"%>
+<script type="text/javascript">
+  function openModal() {
+  document.getElementById('myModal').style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById('myModal').style.display = "none";
+  document.getElementById('myModal').remove()
+}
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
 

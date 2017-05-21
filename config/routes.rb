@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   root "pages#index"
   get "/pages/account" => "pages#account"
+  get "/pages/open_image_modal/:layout_id/:slide_id" => "pages#open_image_modal"
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up" => "users#new", as: "sign_up"
