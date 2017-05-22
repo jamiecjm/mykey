@@ -104,4 +104,6 @@ Rails.application.configure do
   # config.assets.compile = true
   # config.assets.digest = true
   # config.serve_static_files = true 
+
+  config.force_ssl = true
 end

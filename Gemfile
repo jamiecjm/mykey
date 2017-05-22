@@ -64,3 +64,4 @@ gem 'foreman'
 gem 'rails_12factor', group: :production
 gem 'unicorn'
 gem 'fog'
+gem 'rack-ssl'
