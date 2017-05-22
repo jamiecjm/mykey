@@ -60,16 +60,23 @@
   padding: 0;
   width: 90%;
   max-width: 1200px;
+  margin-top: 40px;
 }
 
 /* The Close Button */
 .close {
   color: #eee;
   position: absolute;
-  top: 80px;
+  top: 50px;
   right: 25px;
   font-size: 50px;
   font-weight: bold;
+}
+
+@media screen and (min-width: 765px) {
+  .close {
+    top: 80px;
+  }
 }
 
 .close:hover,

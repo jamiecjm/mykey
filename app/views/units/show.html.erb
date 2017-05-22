@@ -11,13 +11,13 @@
     
 		<%l.pictures.each_with_index do |p,index|%>
 
-		  <div class="col-sm-12 col-md-3" style="height:300px;">
+		  <div class="col-sm-12 col-md-3 img-div">
 		  	<%=link_to "/pages/open_image_modal/#{l.id}/#{index+1}",remote: true do%><%=image_tag p.thumb.url, class: "hover-shadow",id: "#{index+1}", style: "box-shadow: 5px 5px 1px grey;"%><%end%>
 		  </div>
 		
     <%end%>
     <%if l.plan.present?%>
-	  <div class="col-sm-12 col-md-3" style="height:300px;">
+	  <div class="col-sm-12 col-md-3 img-div">
 	  	<%=link_to "/pages/open_image_modal/#{l.id}/#{l.pictures.length}+1",remote: true do%><%=image_tag l.plan.thumb.url, class: "hover-shadow",id: "#{l.pictures.length}+1", style: "box-shadow: 5px 5px 1px grey;"%><%end%>
 	  </div>
     <%end%>
