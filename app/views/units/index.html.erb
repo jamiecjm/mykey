@@ -16,7 +16,7 @@
 </thead>
 
 <tbody>
-<%@units.order("projects.name").each do |u|%>
+<%@units.order("id DESC").each do |u|%>
 <tr>
 <td><%=u.id%></td>
 <td><%=u.project.name%></td>

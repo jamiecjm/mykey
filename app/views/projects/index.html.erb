@@ -3,7 +3,7 @@
 
 
 <div class="list-group" id="sidenav">
-<%Project.all.each do |p|%>
+<%Project.all.order('name').each do |p|%>
 <%=link_to "#{p.name}", project_path(p),class: "list-group-item"%>
 <%end%>
 </div>	
