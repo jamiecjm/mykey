@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   get "/units/dynamic_options/:id" => "units#dynamic_options"
   resources :albums, controller: "albums"
   resources :pictures, controller: "pictures"
+
+  get '*path' => redirect('/')
 end
